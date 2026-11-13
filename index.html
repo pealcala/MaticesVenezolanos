@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=jNIijxkIMZphFciBVj9hEOuktxzAJfoIDVmShpYg1acMTC9rlhbfR108AR91pxY4i6Z5p5bdlUDjC2vkeQEyGpleJH1HDPeJB3ffYrlHgv6UWXZ8Uyuvqfr1X9HucEcJpgVRllBwymMPRow3Wg6QfTjelxUpq4avRjv93ifOY6mhAHOdg9ddFRP0vtaxAfDyR9w-Ku0p_x9-rwZeAFMUcINYsriA8GYnBwiEY4y_y3It0miqng-88HJtVQDnGFVTUjYG10i0MW2YivBxKhFMd5IRscP18zKjzNL3OJN-mhOn5JOlPHYuZfkqehBVOJMg" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pCaE1tVTJNMlpqWldFMk9UZGxNMlF5TURBd05qWXdNekV5WldaaU56YzVZakF4WW1Nd09UYzVOelV3TWpkaE1ESVNDeElIRUxEYzlfT1lDeGdCJmZpbGVuYW1lPWluZGV4Lmh0bWwmb3BpPTEwMzEzNTA1MA"/><script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     :root {
@@ -180,7 +180,7 @@
       padding: 1.25rem 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.55rem;
       overflow-y: auto;
     }
 
@@ -227,9 +227,71 @@
     .nav-label {
       opacity: 1;
       transition: opacity 0.2s ease;
+      flex: 1;
     }
 
-    aside.collapsed .nav-label {
+    .nav-chevron {
+      transition: transform 0.25s ease;
+      color: var(--gold-accent) !important;
+    }
+
+    .nav-group.open .nav-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* SUBMENÚ EVENTOS */
+    .submenu-container {
+      display: none;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding-left: 1.15rem;
+      margin-top: 0.25rem;
+      border-left: 2px solid rgba(229, 169, 59, 0.3);
+      margin-left: 1.35rem;
+    }
+
+    .nav-group.open .submenu-container {
+      display: flex;
+      animation: fadeIn 0.22s ease;
+    }
+
+    .submenu-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.68rem 0.9rem;
+      border-radius: 11px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: #dfd0d3;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .submenu-btn:hover {
+      background: rgba(229, 169, 59, 0.14);
+      color: #fff;
+    }
+
+    .submenu-btn.active {
+      background: linear-gradient(135deg, var(--vinotinto-active) 0%, #610e20 100%);
+      color: #fff;
+      border-color: rgba(245, 196, 83, 0.45);
+      box-shadow: 0 3px 12px rgba(142, 24, 48, 0.4);
+    }
+
+    .submenu-btn i {
+      color: var(--gold-bright);
+      flex-shrink: 0;
+    }
+
+    aside.collapsed .nav-label,
+    aside.collapsed .nav-chevron,
+    aside.collapsed .submenu-container {
       opacity: 0;
       pointer-events: none;
       display: none;
@@ -351,8 +413,10 @@
     .section-header {
       margin-bottom: 1.75rem;
       display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
       border-bottom: 2px solid rgba(120, 23, 43, 0.25);
       padding-bottom: 0.85rem;
     }
@@ -371,6 +435,7 @@
       color: var(--text-muted);
       font-size: 0.95rem;
       font-weight: 500;
+      margin-top: 0.2rem;
     }
 
     /* TARJETA GRANDE DE SOBRE NOSOTROS */
@@ -532,7 +597,7 @@
       margin-top: 2px;
     }
 
-    /* GRID RECUADROS: REPERTORIO */
+    /* GRID RECUADROS: REPERTORIO Y EVENTOS */
     .songs-toolbar {
       display: flex;
       gap: 1rem;
@@ -546,7 +611,7 @@
       position: relative;
       flex: 1;
       min-width: 260px;
-      max-width: 420px;
+      max-width: 440px;
     }
 
     .search-box input {
@@ -574,6 +639,13 @@
       color: var(--text-muted);
     }
 
+    .toolbar-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     .tone-badge {
       background: linear-gradient(135deg, var(--badge-tone-bg) 0%, #560818 100%);
       color: var(--badge-tone-text);
@@ -581,13 +653,49 @@
       font-weight: 800;
       padding: 0.35rem 0.85rem;
       border-radius: 30px;
-      font-size: 0.86rem;
+      font-size: 0.85rem;
       letter-spacing: 0.5px;
       box-shadow: 0 3px 8px rgba(128, 14, 38, 0.35);
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
+    }
+
+    .moment-badge {
+      background: #eee1c7;
+      color: var(--vinotinto-header-2);
+      border: 1px solid #d5c29f;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-mode-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      color: var(--text-main);
+      padding: 0.55rem 1rem;
+      border-radius: 12px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-mode-toggle:hover, .btn-mode-toggle.active-mode {
+      background: var(--vinotinto-active);
+      color: #fff;
+      border-color: var(--vinotinto-active);
     }
 
     .songs-grid {
@@ -604,7 +712,7 @@
       box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      gap: 1.15rem;
+      gap: 1.05rem;
       transition: all 0.25s ease;
       cursor: pointer;
     }
@@ -614,6 +722,13 @@
       box-shadow: var(--shadow-md);
       border-color: var(--vinotinto-accent);
       background: var(--bg-card-hover);
+    }
+
+    .song-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .song-card-header {
@@ -628,6 +743,7 @@
       font-weight: 700;
       color: var(--vinotinto-header-2);
       font-family: 'Playfair Display', serif;
+      line-height: 1.3;
     }
 
     .song-snippet {
@@ -641,6 +757,7 @@
       overflow: hidden;
       border-left: 3px solid #dfcbb1;
       padding-left: 0.75rem;
+      white-space: pre-line;
     }
 
     .song-btn-view {
@@ -665,7 +782,70 @@
       border-color: var(--vinotinto-active);
     }
 
-    /* MODAL DE RESEÑA Y ENSAYO */
+    /* VISTA CONTINUA DE MISA (GUION COMPLETO) */
+    .full-mass-container {
+      display: none;
+      flex-direction: column;
+      gap: 1.75rem;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .full-mass-container.active {
+      display: flex;
+    }
+
+    .mass-block-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-warm);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mass-block-header {
+      background: linear-gradient(135deg, #380a13 0%, #22040a 100%);
+      padding: 1rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-bottom: 2px solid var(--gold-accent);
+    }
+
+    .mass-block-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .mass-block-moment {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gold-bright);
+      font-weight: 700;
+    }
+
+    .mass-block-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: #fff6e8;
+      font-weight: 700;
+    }
+
+    .mass-block-lyrics {
+      padding: 1.75rem 2rem;
+      color: var(--text-main);
+      font-size: 1.06rem;
+      line-height: 1.85;
+      white-space: pre-line;
+      background: #faf4e8;
+    }
+
+    /* MODAL DE DETALLE / LETRAS */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -688,8 +868,8 @@
       border-radius: 24px;
       border: 2px solid var(--gold-accent);
       width: 100%;
-      max-width: 680px;
-      max-height: 88vh;
+      max-width: 720px;
+      max-height: 90vh;
       display: flex;
       flex-direction: column;
       box-shadow: 0 20px 50px rgba(0,0,0,0.6);
@@ -705,6 +885,17 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 2px solid var(--gold-accent);
+      gap: 1rem;
+    }
+
+    .modal-moment-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gold-bright);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      display: none;
     }
 
     .modal-song-title {
@@ -726,6 +917,7 @@
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
+      flex-shrink: 0;
     }
 
     .modal-close-btn:hover {
@@ -768,6 +960,11 @@
       border-color: var(--vinotinto-accent);
     }
 
+    .modal-tool-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
     .modal-lyrics-body {
       padding: 2rem 2.25rem;
       overflow-y: auto;
@@ -776,6 +973,15 @@
       font-size: 1.12rem;
       line-height: 1.9;
       background: #faf4e8;
+    }
+
+    .modal-footer-nav {
+      background: #ebdcc3;
+      padding: 0.75rem 1.75rem;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-warm);
     }
 
     /* ANIMACIONES */
@@ -819,6 +1025,9 @@
       .about-top-banner {
         padding: 2rem 1rem;
       }
+      .modal-lyrics-body {
+        padding: 1.5rem 1.25rem;
+      }
     }
   </style>
 </head>
@@ -832,7 +1041,7 @@
       </button>
       <h1 class="header-title">Matices Venezolanos</h1>
     </div>
-    <div class="header-tagline">
+    <div class="header-tagline" id="headerTagline">
       Repertorio Musical
     </div>
   </header>
@@ -847,7 +1056,7 @@
       </div>
 
       <nav class="sidebar-nav">
-        <button class="nav-btn" data-section="inicio" onclick="showSection('inicio')">
+        <button class="nav-btn active" data-section="inicio" onclick="showSection('inicio')">
           <i data-lucide="sparkles"></i>
           <span class="nav-label">Matices Venezolanos</span>
         </button>
@@ -863,6 +1072,21 @@
           <i data-lucide="music-2"></i>
           <span class="nav-label">Repertorio</span>
         </button>
+
+        <!-- SUBMENÚ EVENTOS -->
+        <div class="nav-group open" id="eventosNavGroup">
+          <button class="nav-btn" id="eventosParentBtn" onclick="toggleEventosMenu()">
+            <i data-lucide="calendar-heart"></i>
+            <span class="nav-label">Eventos</span>
+            <i data-lucide="chevron-down" class="nav-chevron" style="width:18px;height:18px;"></i>
+          </button>
+          <div class="submenu-container" id="eventosSubmenu">
+            <button class="submenu-btn" data-section="misa-aguinaldos-2026" onclick="showSection('misa-aguinaldos-2026')">
+              <i data-lucide="church" style="width:16px;height:16px;"></i>
+              <span>Misa de Aguinaldo 2026</span>
+            </button>
+          </div>
+        </div>
       </nav>
     </aside>
 
@@ -883,6 +1107,9 @@
             <button class="quick-pill" onclick="showSection('repertorio')">
               <i data-lucide="music"></i> Ver Repertorio
             </button>
+            <button class="quick-pill" onclick="showSection('misa-aguinaldos-2026')">
+              <i data-lucide="church"></i> Misa de Aguinaldo 2026
+            </button>
             <button class="quick-pill" onclick="showSection('integrantes')">
               <i data-lucide="users-2"></i> Conocer Integrantes
             </button>
@@ -896,8 +1123,10 @@
       <!-- SECCIÓN: SOBRE NOSOTROS -->
       <section id="section-sobre-nosotros" class="content-section">
         <div class="section-header">
-          <h2 class="section-title"><i data-lucide="compass"></i> Sobre Nosotros</h2>
-          <p class="section-subtitle">Nuestra historia, sentido y visión cultural</p>
+          <div>
+            <h2 class="section-title"><i data-lucide="compass"></i> Sobre Nosotros</h2>
+            <p class="section-subtitle">Nuestra historia, sentido y visión cultural</p>
+          </div>
         </div>
 
         <div class="about-big-card">
@@ -933,40 +1162,79 @@
       <!-- SECCIÓN: INTEGRANTES -->
       <section id="section-integrantes" class="content-section">
         <div class="section-header">
-          <h2 class="section-title"><i data-lucide="users"></i> Integrantes</h2>
-          <p class="section-subtitle">Las voces e instrumentos que dan vida a cada nota</p>
+          <div>
+            <h2 class="section-title"><i data-lucide="users"></i> Integrantes</h2>
+            <p class="section-subtitle">Las voces e instrumentos que dan vida a cada nota</p>
+          </div>
         </div>
         <div class="members-grid" id="membersContainer"></div>
       </section>
 
-      <!-- SECCIÓN: REPERTORIO -->
+      <!-- SECCIÓN: REPERTORIO GENERAL -->
       <section id="section-repertorio" class="content-section">
         <div class="section-header">
-          <h2 class="section-title"><i data-lucide="music-2"></i> Repertorio</h2>
-          <p class="section-subtitle">Explora las tonalidades, contexto y temas</p>
+          <div>
+            <h2 class="section-title"><i data-lucide="music-2"></i> Repertorio</h2>
+            <p class="section-subtitle">Explora las tonalidades, contexto y temas</p>
+          </div>
         </div>
 
         <div class="songs-toolbar">
           <div class="search-box">
             <i data-lucide="search"></i>
-            <input type="text" id="songSearchInput" placeholder="Buscar por título o tonalidad..." oninput="filterSongs()">
+            <input type="text" id="songSearchInput" placeholder="Buscar por título, tonalidad o letra..." oninput="filterSongs()">
           </div>
           <div id="songsCountBadge" class="tone-badge">
-            7 Canciones
+            7 Obras
           </div>
         </div>
 
         <div class="songs-grid" id="songsContainer"></div>
       </section>
 
+      <!-- SECCIÓN EVENTO: MISA DE AGUINALDO 2026 -->
+      <section id="section-misa-aguinaldos-2026" class="content-section">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title"><i data-lucide="church"></i> Misa de Aguinaldo 2026</h2>
+            <p class="section-subtitle">Parroquia Sagrada Familia • Orden Litúrgico y Letras Completas</p>
+          </div>
+          <div class="toolbar-actions">
+            <button class="btn-mode-toggle active-mode" id="btnMassGridView" onclick="switchMassViewMode('grid')">
+              <i data-lucide="layout-grid" style="width:16px;height:16px;"></i> Tarjetas
+            </button>
+            <button class="btn-mode-toggle" id="btnMassListView" onclick="switchMassViewMode('full')">
+              <i data-lucide="scroll-text" style="width:16px;height:16px;"></i> Guion Continuo
+            </button>
+          </div>
+        </div>
+
+        <div class="songs-toolbar">
+          <div class="search-box">
+            <i data-lucide="search"></i>
+            <input type="text" id="massSearchInput" placeholder="Buscar por momento litúrgico, canto, tono o letra..." oninput="filterMassSongs()">
+          </div>
+          <div id="massCountBadge" class="tone-badge">
+            <i data-lucide="list-music" style="width:14px;height:14px;"></i> 11 Cantos
+          </div>
+        </div>
+
+        <!-- Vista en Tarjetas de la Misa -->
+        <div class="songs-grid" id="massSongsContainer"></div>
+
+        <!-- Vista en Guion Continuo de la Misa -->
+        <div class="full-mass-container" id="fullMassContainer"></div>
+      </section>
+
     </main>
   </div>
 
-  <!-- MODAL DE RESEÑA Y ENSAYO -->
+  <!-- MODAL DE DETALLE / LETRAS -->
   <div class="modal-overlay" id="lyricsModal" onclick="closeLyricsModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
         <div>
+          <div class="modal-moment-label" id="modalMoment">Momento Litúrgico</div>
           <h3 class="modal-song-title" id="modalTitle">Título Canción</h3>
           <span id="modalToneBadge" class="tone-badge" style="display: inline-flex; margin-top: 6px;">Tono: -</span>
         </div>
@@ -988,11 +1256,22 @@
       </div>
 
       <div class="modal-lyrics-body" id="modalLyricsText"></div>
+
+      <div class="modal-footer-nav" id="modalFooterNav">
+        <button class="modal-tool-btn" id="prevSongBtn" onclick="navigateMassSong(-1)">
+          <i data-lucide="chevron-left"></i> Anterior
+        </button>
+        <span id="modalCounter" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">1 / 11</span>
+        <button class="modal-tool-btn" id="nextSongBtn" onclick="navigateMassSong(1)">
+          Siguiente <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
     const LOGO_SRC = "assets/logo-matices.png";
+    const FALLBACK_LOGO = "https://raw.githubusercontent.com/pealcala/MaticesVenezolanos/main/assets/logo-matices.png";
 
     function setupLogos() {
       const targets = [
@@ -1003,6 +1282,11 @@
 
       targets.forEach(img => {
         img.src = LOGO_SRC;
+        img.onerror = () => {
+          if (img.src !== FALLBACK_LOGO) {
+            img.src = FALLBACK_LOGO;
+          }
+        };
       });
     }
 
@@ -1088,7 +1372,7 @@ triste voy al malecón,
 para ver si el río cambia la corriente
 y vuelvo a ver mi flor.`,
         autor: "Manuel Yánez",
-        descripcion: "Emblemático vals guayanés que retrata la contemplación poética de una flor que desciende flotando por las aguas del río Orinoco frente al malecón de Ciudad Bolívar, simbolizando un amor fugaz arrastrado por la corriente"
+        descripcion: "Emblemático vals guayanés que retrata la contemplación poética de una flor que desciende flotando por las aguas del río Orinoco frente al malecón de Ciudad Bolívar, simbolizando un amor fugaz arrastrado por la corriente."
       },
       {
         id: "tonada-por-ella",
@@ -1128,7 +1412,7 @@ Y creo que hoy en día se vació
 Me dice mi botella de Cocuy
 Que Venezuela renació`,
         autor: "Tonada Venezolana",
-        descripcion: "Composición testimonial cargada de nostalgia y amor profundo por la tierra venezolana, hilvanando referencias geográficas icónicas (el Salto Ángel, el Lago de Maracaibo, los tepuyes) y el legado del Tío Simón"
+        descripcion: "Composición testimonial cargada de nostalgia y amor profundo por la tierra venezolana, hilvanando referencias geográficas icónicas (el Salto Ángel, el Lago de Maracaibo, los tepuyes) y el legado del Tío Simón."
       },
       {
         id: "el-velero",
@@ -1168,10 +1452,10 @@ Busco dichas en otros puertos
 Que no me hagan esperar
 Dando rumbo a mi velero
 Con el timón del soñar
-Busco dicha en otros puertos
+Busco dichas en otros puertos
 Que no me hagan esperar`,
         autor: "Música Costera Oriental",
-        descripcion: "Pieza costeña tradicional donde se entrelaza la metáfora marina de un velero listo para la navegación y la dulce espera de un amor que brinde el viento y el rumbo favorable"
+        descripcion: "Pieza costeña tradicional donde se entrelaza la metáfora marina de un velero listo para la navegación y la dulce espera de un amor que brinde el viento y el rumbo favorable."
       },
       {
         id: "mi-matiz",
@@ -1195,7 +1479,7 @@ Si de a poquito se nutre
 Si de a poquito se cura
 Mi granito es mi matiz`,
         autor: "María Valentina León Narváez",
-        descripcion: "Obra original e identificatoria de la agrupación, celebrando la armonía entre sopranos, contraltos y tenores unidos al cuatro y la percusión para rendir homenaje a la identidad venezolana"
+        descripcion: "Obra original e identificatoria de la agrupación, celebrando la armonía entre sopranos, contraltos y tenores unidos al cuatro y la percusión para rendir homenaje a la identidad venezolana."
       },
       {
         id: "venezuela",
@@ -1239,7 +1523,7 @@ y el tifón rompe mis velas,
 enterrad mi cuerpo cerca del mar
 en Venezuela.`,
         autor: "Pablo Herrero y José Luis Armenteros",
-        descripcion: "Considerada un segundo himno sentimental de Venezuela, recorre con devoción lírica la inmensidad de sus paisajes (el desierto, la selva, la nieve, los volcanes y el Caribe) y el arraigo indeleble a la patria"
+        descripcion: "Considerada un segundo himno sentimental de Venezuela, recorre con devoción lírica la inmensidad de sus paisajes (el desierto, la selva, la nieve, los volcanes y el Caribe) y el arraigo indeleble a la patria."
       },
       {
         id: "el-papagayo",
@@ -1291,7 +1575,7 @@ Y que juegue con el viento la bandera nacional
 Y que juegue con el viento la bandera nacional
 Y que juegue con el viento la bandera nacional`,
         autor: "Iván Pérez Rossi",
-        descripcion: "Clásico festivo y popularizado por Serenata Guayanesa, que une el tradicional juego infantil del papagayo con los colores y el simbolismo de la bandera nacional venezolana"
+        descripcion: "Clásico festivo y popularizado por Serenata Guayanesa, que une el tradicional juego infantil del papagayo con los colores y el simbolismo de la bandera nacional venezolana."
       },
       {
         id: "el-burrito-sabanero",
@@ -1352,17 +1636,422 @@ Apúrate, mi burrito, que ya vamos a llegar
 Tuki tuki tuki tuki, tuki tuki tuki tu
 Apúrate mi burrito, vamos a ver a Jesús`,
         autor: "Hugo Blanco",
-        descripcion: "Villancico en ritmo de aguinaldo venezolano de proyección universal, narrando el alegre viaje de un pastorcillo campesino con su cuatrico rumbo al portal de Belén"
+        descripcion: "Villancico en ritmo de aguinaldo venezolano de proyección universal, narrando el alegre viaje de un pastorcillo campesino con su cuatrico rumbo al portal de Belén."
       }
     ];
+
+    // EVENTO: MISA DE AGUINALDO 2026 - PARROQUIA SAGRADA FAMILIA
+    const misaAguinaldosData = [
+      {
+        orden: 1,
+        momento: "Entrada",
+        titulo: "Popurrí: Corre Caballito / Al Llegar Aquí",
+        tono: "La+",
+        letra: `CORRE CABALLITO (La+)
+
+Corre caballito, vamos a Belén 
+A ver a María y al niño también
+Corre caballito Vamos a Belén
+A ver a María y al niño también 
+Al niño también dicen los pastores
+Que ha nacido un niño cubierto de flores 
+Que ha nacido un niño cubierto de flores
+
+El ángel Gabriel anunció a María
+Que el hijo divino, de ella nacería
+El ángel Gabriel Anunció a María
+Que el hijo divino, de ella nacería
+De ella nacería dicen los pastores
+Que ha nacido un niño cubierto de flores
+Que ha nacido un niño cubierto de flores
+
+----------------------------------------
+
+AL LLEGAR AQUÍ
+
+Al llegar aquí,
+Al llegar aquí,
+Me saco el pañuelo
+Para darle a todos feliz año nuevo 
+Para darle a todos feliz año nuevo
+
+Palomita blanca, Palomita blanca,
+Patitas azules
+Tú eres la que cantas por dentro´e las nubes
+Tú eres la que cantas por dentro´e las nubes
+
+lan lan lan lan
+LALALALALALALALA
+lan lan lan lan
+LALALALALALALALA`
+      },
+      {
+        orden: 2,
+        momento: "Perdón",
+        titulo: "Señor Ten Piedad",
+        tono: "Mi",
+        letra: `Señor ten piedad 
+Piedad de nosotros 
+Y las navidades se llenan de gozo 
+Señor ten piedad 
+Piedad de nosotros 
+Y las navidades se llenan de gozo
+
+Oh. Niño divino de la salvación por nuestras ofensas pedimos perdón.
+Oh niño divino de la salvación danos la alegría de tu corazón. 
+
+Señor ten piedad
+Piedad de nosotros
+Y las navidades se llenan de gozo
+Señor ten piedad
+Piedad de nosotros
+Y las navidades se llenan de gozo`
+      },
+      {
+        orden: 3,
+        momento: "Inter Lectura",
+        titulo: "Inunda Mi Corazón",
+        tono: "Do+",
+        letra: `Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+
+Y ven a mí, y ven a mi
+Que de ti sediento estoy
+Y ven a mí, y ven a mi
+Que de ti sediento estoy
+
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor`
+      },
+      {
+        orden: 4,
+        momento: "Ofertorio",
+        titulo: "Venimos a Ofrecer",
+        tono: "Mi+",
+        letra: `Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Con el alma alegre y gozo ante tu altar
+Tu pueblo entrega todo por la felicidad
+Con el alma alegre y gozo ante tu altar
+Tu pueblo entrega todo por la felicidad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Acepta nuestra ofrenda Dios de toda bondad,
+Que en tu presencia dejo Divina Majestad
+Acepta nuestra ofrenda Dios de toda bondad,
+Que en tu presencia dejo Divina Majestad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Recibe de esta tierra los frutos que se dan
+Y sean sustento para la humanidad
+Recibe de esta tierra los frutos que se dan
+Y sean sustento para la humanidad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán`
+      },
+      {
+        orden: 5,
+        momento: "Santo",
+        titulo: "Santo",
+        tono: "Mi-",
+        letra: `Santo, santo, santo 
+Santo es el Señor, 
+Dios del Universo, Santo es el Señor 
+Santo, santo, santo 
+Santo es el Señor, 
+Dios del Universo, Santo es el Señor 
+
+Hosanna en el cielo, hosanna en las alturas, 
+bendito el que viene en nombre del Señor 
+Hosanna en el cielo, hosanna en las alturas, 
+bendito el que viene en nombre del Señor`
+      },
+      {
+        orden: 6,
+        momento: "Cordero",
+        titulo: "Cordero",
+        tono: "Mi+",
+        letra: `Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+ten piedad de nosotros 
+
+Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+ten piedad de nosotros 
+
+Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+y danos la paz`
+      },
+      {
+        orden: 7,
+        momento: "Comunión",
+        titulo: "Niño Lindo",
+        tono: "Mi-",
+        letra: `Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Esa tu hermosura, ese tu candor 
+El alma me roba, el alma me roba
+Me roba el amor (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Con tus ojos lindos, Jesús, mírame 
+Y solo con eso, y solo con eso
+Me consolaré (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+La vida bien mío, y el alma también 
+Te ofrezco gustoso, te ofrezco gustoso
+Rendido a tus pies (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+De mí no te ausentes, pues, ¿sin tí qué haré?
+Cuando tú te vayas, Cuando tú te vayas
+haz por llevarme (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Adiós, tierno Infante, adiós, Niño, adiós
+adiós, dulce amante, adiós, dulce amante,
+adiós Niño adiós (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios`
+      },
+      {
+        orden: 8,
+        momento: "Reflexión",
+        titulo: "El Tamborilero",
+        tono: "Do+",
+        letra: `El camino que lleva a Belén
+Baja hasta el valle que la nieve cubrió
+Los pastorcillos quieren ver a su rey
+Le traen regalos en su humilde zurrón
+Ropopompon, ropopompon
+Ha nacido en un portal de Belén
+El niño Dios
+
+Yo quisiera poner a tus pies
+Algún presente que te agrade, Señor
+Mas tú ya sabes que soy pobre también
+Y no poseo más que un viejo tambor
+Ropopompon, ropopopon
+En tu honor frente al portal tocaré
+Con mi tambor
+
+El camino que lleva a Belén
+Yo voy marcando con mi viejo tambor
+Nada mejor hay que te pueda ofrecer
+Su ronco acento es un canto de amor
+Ropopompon, ropopompon
+Cuando Dios me vio tocando ante él
+Me sonrió`
+      },
+      {
+        orden: 9,
+        momento: "Salida I",
+        titulo: "A Ti Te Cantamos (Preciosa María)",
+        tono: "Re-",
+        letra: `A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Tú la flor más pura, Del vergel del cielo
+Eres la esperanza, Eres el consuelo
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+A ti gran señora, A ti suspiramos
+Madre del Dios niño, A quien tanto amamos
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+No nos desampares, Divina Señora,
+Sé nuestro consuelo en cualquiera hora.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Lumbrera del mundo, cándida María,
+En la vida triste nuestros pasos guía
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Por Ti, Virgen pía, baja el Redentor;
+Por Ti el alma mía se inflama de amor.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Virgen redentora, quiero ser tu amigo,
+Llévame contigo al llegar mi hora.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María`
+      },
+      {
+        orden: 10,
+        momento: "Salida II",
+        titulo: "Burrito Sabanero",
+        tono: "Re+",
+        letra: `Con mi burrito sabanero, voy camino de Belén
+Con mi burrito sabanero, voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+El lucerito mañanero ilumina mi sendero
+El lucerito mañanero ilumina mi sendero
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+Tuki tuki tuki tuki
+Tuki tuki tuki ta
+Apúrate, mi burrito
+Que ya vamos a llegar
+Tuki tuki tuki tuki
+Tuki tuki tuki tu
+Apúrate mi burrito
+Vamos a ver a Jesús
+
+Con mi cuatrico voy cantando, mi burrito va trotando
+Con mi cuatrico voy cantando, mi burrito va trotando
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+Tuki tuki tuki tuki
+Tuki tuki tuki ta
+Apúrate, mi burrito
+Que ya vamos a llegar
+Tuki tuki tuki tuki
+Tuki tuki tuki tu
+Apúrate mi burrito
+Vamos a ver a Jesús`
+      },
+      {
+        orden: 11,
+        momento: "Salida III",
+        titulo: "La Jornada (Din Din Din)",
+        tono: "Re+",
+        letra: `¡DIN, DIN, DIN! ES HORA DE PARTIR
+¡DIN, DIN, DIN! CAMINO DE BELÉN
+LOS ESPOSOS VAN DESDE NAZARETH
+
+La Virgen María, modesta y sencilla, 
+Es la maravilla del dichoso Edén.
+Sobre un jumentillo se sienta María
+Y es experto guía el casto José. 
+
+Van José y María, van hacia Belén
+Donde nuestro bien ha de aparecer. 
+Largo es el camino, aire sofocante,
+Mas es importante cumplir el deber.
+
+Llegan extenuados al morir el día
+Y en la noche fría no hay dónde hospedar.
+José solicita, fuerte y animoso,
+Lugar de reposo en todo Belén.
+
+Posadas repletas de inmenso gentío,
+¡Ay, Señor, ¡Dios mío! ¿A dónde llegar?
+Y saliendo al campo una gruta encuentran
+Y en ella se adentran para pernoctar.
+
+Al siguiente día, radiante de luz,
+¡Dan la bienvenida al Niño Jesús!
+San José y la Virgen la mula y el buey
+fueron lo que vieron al niño nacer.
+
+Celebremos juntos este hermoso día:
+llega la alegría de la Navidad.`
+      }
+    ];
+
+    let currentMassIndex = 0;
 
     document.addEventListener("DOMContentLoaded", () => {
       setupLogos();
       renderIntegrantes();
       renderRepertorio(repertorioData);
+      renderMassCards(misaAguinaldosData);
+      renderFullMass(misaAguinaldosData);
       setupSidebarToggle();
       lucide.createIcons();
     });
+
+    function toggleEventosMenu() {
+      const sidebar = document.getElementById("sidebar");
+      const group = document.getElementById("eventosNavGroup");
+      if (sidebar.classList.contains("collapsed")) {
+        sidebar.classList.remove("collapsed");
+        group.classList.add("open");
+      } else {
+        group.classList.toggle("open");
+      }
+    }
 
     function renderIntegrantes() {
       const container = document.getElementById("membersContainer");
@@ -1420,10 +2109,95 @@ Apúrate mi burrito, vamos a ver a Jesús`,
       const query = document.getElementById("songSearchInput").value.toLowerCase();
       const filtered = repertorioData.filter(s => 
         s.titulo.toLowerCase().includes(query) || 
+        s.cita.toLowerCase().includes(query) ||
         s.descripcion.toLowerCase().includes(query) ||
         s.tono.toLowerCase().includes(query)
       );
       renderRepertorio(filtered);
+    }
+
+    /* RENDERIZADO DE EVENTO: MISA DE AGUINALDO 2026 */
+    function renderMassCards(list) {
+      const container = document.getElementById("massSongsContainer");
+      container.innerHTML = "";
+
+      list.forEach(item => {
+        const originalIndex = misaAguinaldosData.findIndex(s => s.orden === item.orden);
+        const card = document.createElement("div");
+        card.className = "song-card";
+        card.onclick = () => openMassModal(originalIndex);
+
+        card.innerHTML = `
+          <div class="song-card-top">
+            <span class="moment-badge">${item.orden}. ${item.momento}</span>
+            <span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> ${item.tono}</span>
+          </div>
+          <div class="song-card-header">
+            <h3 class="song-title">${item.titulo}</h3>
+          </div>
+          <p class="song-snippet">${item.letra}</p>
+          <div class="song-btn-view">
+            <i data-lucide="book-open" style="width: 16px; height: 16px;"></i> Ver Letra Completa
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("massCountBadge").innerHTML = `<i data-lucide="list-music" style="width:14px;height:14px;"></i> ${list.length} Cantos`;
+      lucide.createIcons();
+    }
+
+    function renderFullMass(list) {
+      const container = document.getElementById("fullMassContainer");
+      container.innerHTML = "";
+
+      list.forEach(item => {
+        const block = document.createElement("div");
+        block.className = "mass-block-card";
+        block.innerHTML = `
+          <div class="mass-block-header">
+            <div class="mass-block-title-group">
+              <span class="mass-block-moment">${item.orden}. ${item.momento}</span>
+              <h3 class="mass-block-title">${item.titulo}</h3>
+            </div>
+            <span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}</span>
+          </div>
+          <div class="mass-block-lyrics">${item.letra}</div>
+        `;
+        container.appendChild(block);
+      });
+      lucide.createIcons();
+    }
+
+    function switchMassViewMode(mode) {
+      const grid = document.getElementById("massSongsContainer");
+      const full = document.getElementById("fullMassContainer");
+      const btnGrid = document.getElementById("btnMassGridView");
+      const btnList = document.getElementById("btnMassListView");
+
+      if (mode === "grid") {
+        grid.style.display = "grid";
+        full.classList.remove("active");
+        btnGrid.classList.add("active-mode");
+        btnList.classList.remove("active-mode");
+      } else {
+        grid.style.display = "none";
+        full.classList.add("active");
+        btnList.classList.add("active-mode");
+        btnGrid.classList.remove("active-mode");
+      }
+    }
+
+    function filterMassSongs() {
+      const query = document.getElementById("massSearchInput").value.toLowerCase();
+      const filtered = misaAguinaldosData.filter(s => 
+        s.momento.toLowerCase().includes(query) ||
+        s.titulo.toLowerCase().includes(query) || 
+        s.letra.toLowerCase().includes(query) ||
+        s.tono.toLowerCase().includes(query)
+      );
+      renderMassCards(filtered);
+      renderFullMass(filtered);
     }
 
     function showSection(sectionId) {
@@ -1431,12 +2205,20 @@ Apúrate mi burrito, vamos a ver a Jesús`,
         sec.classList.remove("active-section");
       });
 
-      document.querySelectorAll(".nav-btn").forEach(btn => {
+      document.querySelectorAll(".nav-btn, .submenu-btn").forEach(btn => {
         btn.classList.remove("active");
         if (btn.dataset.section === sectionId) {
           btn.classList.add("active");
         }
       });
+
+      const tagline = document.getElementById("headerTagline");
+      if (sectionId === "misa-aguinaldos-2026") {
+        document.getElementById("eventosNavGroup").classList.add("open");
+        tagline.innerText = "Evento • Misa de Aguinaldo 2026";
+      } else {
+        tagline.innerText = "Repertorio Musical";
+      }
 
       const target = document.getElementById(`section-${sectionId}`);
       if (target) {
@@ -1465,23 +2247,25 @@ Apúrate mi burrito, vamos a ver a Jesús`,
     let autoScrollInterval = null;
     let currentFontSize = 1.12;
 
+    /* MODAL PARA REPERTORIO GENERAL */
     function openSongModal(item) {
+      document.getElementById("modalMoment").style.display = "none";
+      document.getElementById("modalFooterNav").style.display = "none";
+
       document.getElementById("modalTitle").innerText = item.titulo;
       document.getElementById("modalToneBadge").innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
       
       const modalBody = document.getElementById("modalLyricsText");
+      modalBody.style.whiteSpace = "normal";
       modalBody.innerHTML = `
         <div style="margin-bottom: 1.25rem; background: #eee1c7; padding: 1.25rem; border-left: 4px solid var(--vinotinto-accent); border-radius: 0 12px 12px 0;">
-          <p style="font-style: italic; white-space: pre-line; margin-bottom: 0.35rem;">"${item.cita}"</p>
+          <p style="font-style: italic; white-space: pre-line; margin-bottom: 0.5rem;">"${item.cita}"</p>
           <small style="color: var(--vinotinto-accent); font-weight: 700;">— ${item.autor}</small>
         </div>
         <p style="margin-bottom: 1.25rem; line-height: 1.85;">
           <strong>Reseña e Historia:</strong><br>
           ${item.descripcion}
         </p>
-        <div style="background: #fbf6ec; border: 1px dashed var(--border-warm); padding: 1rem 1.25rem; border-radius: 12px; font-size: 0.95rem; color: var(--text-muted);">
-          
-        </div>
       `;
       modalBody.style.fontSize = `${currentFontSize}rem`;
       modalBody.scrollTop = 0;
@@ -1489,6 +2273,42 @@ Apúrate mi burrito, vamos a ver a Jesús`,
       stopAutoScroll();
       document.getElementById("lyricsModal").classList.add("open");
       lucide.createIcons();
+    }
+
+    /* MODAL PARA MISA DE AGUINALDO 2026 */
+    function openMassModal(index) {
+      currentMassIndex = index;
+      const item = misaAguinaldosData[index];
+
+      const momentEl = document.getElementById("modalMoment");
+      momentEl.style.display = "block";
+      momentEl.innerText = `Momento ${item.orden} • ${item.momento}`;
+
+      document.getElementById("modalTitle").innerText = item.titulo;
+      document.getElementById("modalToneBadge").innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
+      
+      const modalBody = document.getElementById("modalLyricsText");
+      modalBody.style.whiteSpace = "pre-line";
+      modalBody.textContent = item.letra;
+      modalBody.style.fontSize = `${currentFontSize}rem`;
+      modalBody.scrollTop = 0;
+
+      const footerNav = document.getElementById("modalFooterNav");
+      footerNav.style.display = "flex";
+      document.getElementById("modalCounter").innerText = `${index + 1} / ${misaAguinaldosData.length}`;
+      document.getElementById("prevSongBtn").disabled = index === 0;
+      document.getElementById("nextSongBtn").disabled = index === misaAguinaldosData.length - 1;
+
+      stopAutoScroll();
+      document.getElementById("lyricsModal").classList.add("open");
+      lucide.createIcons();
+    }
+
+    function navigateMassSong(step) {
+      const nextIndex = currentMassIndex + step;
+      if (nextIndex >= 0 && nextIndex < misaAguinaldosData.length) {
+        openMassModal(nextIndex);
+      }
     }
 
     function closeLyricsModal() {
