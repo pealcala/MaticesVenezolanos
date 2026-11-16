@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=CKZ4y9_SXBMO0kk3Qovfa3odB9PnJ-Xks2cvftjV_EhJCQq37eaEZ6aBYGScrpjR_C4JBkcp4d19rsANgFzoGEuMQsETzogpuXsK8f_Axjg5WGp_ZZiC3XrQ7y6KTUpA2hbKgXzz7OP541z3xnXILQwl2cPqKj-BUeOet8Ut8K0gDCgs8TCoSBCzHbuvFKJZUdcHfqwhxLAfVXvTuwwQDE7Yf4_BNTSKsf19CnwHDQGF3bX_k4t9tuaYQhZnnVgtBowh7GbBw5o9g6WUT1QFq9pw4oVcwyZxIA1zPaydLyo_m7QfAF9Kj5edG0mBxem-" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9jb250cmlidXRpb24udXNlcmNvbnRlbnQuZ29vZ2xlLmNvbS9kb3dubG9hZD9jPUNneGlZWEprWDNOMGIzSmhaMlVTVUJJTmNtVnpjRzl1YzJWZlpHRjBZUm9fQ2pCbE1tSmxZbVV3TW1ZM1ltUXlOV1psTURBd05qWXdObU5oT0RJNE5XRmtPVEE0TkRRelpHRTNZMll5WWpRNU1tRVNDeElIRUxEYzlfT1lDeGdCJmZpbGVuYW1lPXJlcGVydG9yaW8uaHRtbCZvcGk9MTAzMTM1MDUw"/><script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/estilos.css">
   <style>
     .youtube-tool-btn {
@@ -30,6 +30,54 @@
       cursor: default;
       pointer-events: none;
       opacity: 0.85;
+    }
+    .yt-inline-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: #c41e3a;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+      font-style: normal;
+    }
+    .yt-inline-link:hover {
+      background-color: #9e142b;
+      transform: translateY(-1px);
+    }
+    .calipso-section {
+      margin-bottom: 1.5rem;
+      background: #eee1c7;
+      padding: 1.25rem;
+      border-left: 4px solid var(--vinotinto-accent);
+      border-radius: 0 12px 12px 0;
+    }
+    .calipso-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px dashed #cbb896;
+      padding-bottom: 0.5rem;
+    }
+    .calipso-song-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--vinotinto-header-2);
+    }
+    .calipso-song-author {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--vinotinto-accent);
+      font-weight: 700;
+      margin-top: 0.15rem;
     }
   </style>
 </head>
@@ -54,7 +102,7 @@
           <input type="text" id="songSearchInput" placeholder="Buscar por título, tonalidad o letra..." oninput="filterSongs()">
         </div>
         <div id="songsCountBadge" class="tone-badge">
-          7 Obras
+          9 Obras
         </div>
       </div>
 
@@ -400,6 +448,142 @@ Tuki tuki tuki tuki, tuki tuki tuki tu
 Apúrate mi burrito, vamos a ver a Jesús`,
         autor: "Hugo Blanco",
         descripcion: "Villancico en ritmo de aguinaldo venezolano de proyección universal, narrando el alegre viaje de un pastorcillo campesino con su cuatrico rumbo al portal de Belén."
+      },
+      {
+        id: "popurri-de-calipso",
+        titulo: "Popurrí de Calipso",
+        tono: "RE",
+        youtube: null,
+        esPopurri: true,
+        cita: `Ajá, ajá bandido, estabas callado, estabas escondido sacando tu oro muy cerca del río... • Negro medio pinto • Riqui'ra • Guayana es...`,
+        autor: "Folclore de El Callao / María Lourdes Basanta",
+        descripcion: "Alegre selección de calipsos tradicionales de El Callao y Guayana, celebrando el mestizaje antillano, el oro del Yuruary y la identidad cultural del estado Bolívar.",
+        partes: [
+          {
+            subtitulo: "1. Ajá, ajá Bandido",
+            autor: "Isaac Rojas (Folclore de Venezuela)",
+            youtube: "https://youtu.be/bfau5Y2ti-g?si=PjhH3vlFkw9zyfh0",
+            letra: `Ajá, ajá bandido
+estabas callado, estabas escondido
+sacando tu oro
+muy cerca del río. (Bis)
+
+Un solitario minero
+que se encontraba embombao
+según dice la leyenda
+le dio su nombre a El Callao. (Bis)
+
+Se encontraba tan callado
+con su precioso tesoro
+que le brindaba el Yuruari
+en sus arenas de oro. (Bis)
+
+A nadie decía el secreto
+se lo guardaba muy bien
+por lados de Caratal,
+Nacupay y Tupuquem. (Bis)
+
+Antillanos y franceses
+de El Callao hicieron casa
+con corazón africano
+se acrisolaron en razas. (Bis)`
+          },
+          {
+            subtitulo: "2. Negro medio Pinto",
+            autor: "Folclore popular venezolano (The Same People)",
+            youtube: "https://youtu.be/bfau5Y2ti-g?si=PjhH3vlFkw9zyfh0",
+            letra: `Callao…..
+
+Coro:
+Negro medio pinto, negro medio pinto, negro medio pinto.
+Negro Pinto`
+          },
+          {
+            subtitulo: "3. Riqui’ra",
+            autor: "Folclore popular venezolano (The Same People)",
+            youtube: "https://youtu.be/8WGn7LycRJs?si=hSuYZa5nYSnRA5eX",
+            letra: `El que no levante los brazos tiene riqui-ri,
+el que no levante los brazos tiene ri,
+¡ay!, riquir rá, ricky ri.
+Atájame la burra que se me va,
+riqui-riqui, riquir-rá...`
+          },
+          {
+            subtitulo: "4. Guayana es",
+            autor: "María Lourdes Basanta (Lulú Basanta). Madama de El Callao (1966)",
+            youtube: "https://youtu.be/3A2_n_DRxOo?si=DXU9_0CFzmrfLDOP",
+            letra: `Coro
+Guayana es, Guayana es
+Guayana es, Guayana es
+rica en oro, hierro y mujer
+ven a mi Guayana y verás lo que ya yo se. (Bis)
+
+1
+Orinoco al norte, Brazil por el sur
+Esequibo al este, Colombia al oeste,
+ese es el cuadrante de nuestra Guayana
+y toda esa tierra, toda esa tierra es venezolana.
+
+2
+El Callao, mi tierra, suelo rico en oro
+Con sus cuantas minas que son un tesoro
+Tiene un Río Yuruary rico en aluvión
+Y si usted lo duda, pues venga a el y ponga atención.`
+          }
+        ]
+      },
+      {
+        id: "la-pulga-y-el-piojo",
+        titulo: "La Pulga y El Piojo",
+        tono: "S/T",
+        youtube: "https://youtu.be/l5pmqxjXZHo?si=KivC0I40vn-7oPkH",
+        cita: `La pulga y el piojo se quieren casar, pero no se casan por falta de pan
+Respondió el Gorgojo desde su trigal: "Hágase la boda que yo doy el pan"
+
+Ya no es por el pan que ya lo tenemos,
+ahora es quien baile, ¿dónde lo hallaremos?
+Respondió la Vaca desde su corral:
+"Mmmm, hágase la boda que yo iré a bailar"
+
+Ya no es por el baile que ya lo tenemos,
+Ahora es quien cante, ¿dónde lo hallaremos?
+Respondió la Rana desde el platanal:
+"Hágase la boda que yo iré a cantar"
+
+Ya no es por el canto que ya lo tenemos,
+Ahora es quien coma, ¿dónde lo hallaremos?
+Exclamó el Zamuro, que buen paladar:
+"Je, je, hágase la boda que yo iré a almorzar"
+
+Ya no es quien almuerce que ya lo tenemos,
+Falta quien trabaje ¿dónde lo hallaremos?
+Saltó la Pereza del algarrobal:
+"Hágase la boda, que yo iré a trabajar"
+
+Ya no es quien trabaje, que ya lo tenemos,
+Ahora es la luz, ¿dónde la hallaremos?
+Respondió el Cocuyo desde el chamizal:
+"Hágase la boda, que yo iré a alumbrar"
+
+Ya no es por la luz, que ya lo tenemos
+Ahora es el perfume ¿dónde lo hallaremos?
+Salió el Mapurite desde el matorral:
+"Hágase la boda que yo iré a perfumar"
+
+Ya no es el perfume que ya lo tenemos,
+Ahora es el Padrino ¿dónde lo hallaremos?
+Gritó el Ratoncito: "¡Me importa un comino!
+Bueno, si encierran la Gata, yo soy el Padrino"
+
+Ya no es el Padrino que ya lo tenemos,
+Ahora es la Madrina, ¿dónde la hallaremos?
+Respondió la Gata desde la cocina:
+"Hágase la boda, yo soy la Madrina"
+
+Todos se durmieron por el ron y el vino,
+Entonces la Gata ¡MIAAAUUU! ¡Se comió al padrino!`,
+        autor: "Iván Pérez Rossi (Serenata Guayanesa)",
+        descripcion: "Emblemática canción humorística y narrativa del repertorio infantil y popular venezolano, donde diversos animales del campo se ofrecen para celebrar la boda de la pulga y el piojo hasta un desenlace inesperado."
       }
     ];
 
@@ -417,10 +601,14 @@ Apúrate mi burrito, vamos a ver a Jesús`,
         card.className = "song-card";
         card.onclick = () => openSongModal(item);
 
+        const toneDisplay = item.tono && item.tono !== "S/T"
+          ? `<span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> ${item.tono}</span>`
+          : `<span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> Popurrí / Trad.</span>`;
+
         card.innerHTML = `
           <div class="song-card-header">
             <h3 class="song-title">${item.titulo}</h3>
-            <span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> ${item.tono}</span>
+            ${toneDisplay}
           </div>
           <p class="song-snippet">"${item.cita}"</p>
           <div class="song-btn-view">
@@ -436,21 +624,37 @@ Apúrate mi burrito, vamos a ver a Jesús`,
 
     function filterSongs() {
       const query = document.getElementById("songSearchInput").value.toLowerCase();
-      const filtered = repertorioData.filter(s => 
-        s.titulo.toLowerCase().includes(query) || 
-        s.cita.toLowerCase().includes(query) ||
-        s.descripcion.toLowerCase().includes(query) ||
-        s.tono.toLowerCase().includes(query)
-      );
+      const filtered = repertorioData.filter(s => {
+        const inTitle = s.titulo.toLowerCase().includes(query);
+        const inCita = s.cita.toLowerCase().includes(query);
+        const inDesc = s.descripcion.toLowerCase().includes(query);
+        const inTone = s.tono.toLowerCase().includes(query);
+        const inPartes = s.partes ? s.partes.some(p => p.subtitulo.toLowerCase().includes(query) || p.letra.toLowerCase().includes(query)) : false;
+        return inTitle || inCita || inDesc || inTone || inPartes;
+      });
       renderRepertorio(filtered);
     }
 
     function openSongModal(item) {
       document.getElementById("modalTitle").innerText = item.titulo;
-      document.getElementById("modalToneBadge").innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
+      
+      const badgeEl = document.getElementById("modalToneBadge");
+      if (item.tono && item.tono !== "S/T") {
+        badgeEl.style.display = "inline-flex";
+        badgeEl.innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
+      } else {
+        badgeEl.style.display = "inline-flex";
+        badgeEl.innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Música Tradicional`;
+      }
       
       const ytContainer = document.getElementById("modalYoutubeContainer");
-      if (item.youtube) {
+      if (item.esPopurri) {
+        ytContainer.innerHTML = `
+          <span class="modal-tool-btn youtube-tool-btn disabled" title="Cada tema del popurrí tiene su propio video abajo">
+            <i data-lucide="youtube" style="width: 16px; height: 16px;"></i> 4 Enlaces abajo
+          </span>
+        `;
+      } else if (item.youtube) {
         ytContainer.innerHTML = `
           <a href="${item.youtube}" target="_blank" rel="noopener noreferrer" class="modal-tool-btn youtube-tool-btn" title="Ver video en YouTube">
             <i data-lucide="youtube" style="width: 16px; height: 16px;"></i> YouTube
@@ -466,16 +670,43 @@ Apúrate mi burrito, vamos a ver a Jesús`,
 
       const modalBody = document.getElementById("modalLyricsText");
       modalBody.style.whiteSpace = "normal";
-      modalBody.innerHTML = `
-        <div style="margin-bottom: 1.25rem; background: #eee1c7; padding: 1.25rem; border-left: 4px solid var(--vinotinto-accent); border-radius: 0 12px 12px 0;">
-          <p style="font-style: italic; white-space: pre-line; margin-bottom: 0.5rem;">${item.cita}</p>
-          <small style="color: var(--vinotinto-accent); font-weight: 700;">— ${item.autor}</small>
-        </div>
-        <p style="margin-bottom: 1.25rem; line-height: 1.85;">
-          <strong>Reseña e Historia:</strong><br>
-          ${item.descripcion}
-        </p>
-      `;
+
+      if (item.esPopurri && item.partes) {
+        let partesHtml = item.partes.map(parte => `
+          <div class="calipso-section">
+            <div class="calipso-section-header">
+              <div>
+                <div class="calipso-song-title">${parte.subtitulo}</div>
+                <span class="calipso-song-author">— ${parte.autor}</span>
+              </div>
+              <a href="${parte.youtube}" target="_blank" rel="noopener noreferrer" class="yt-inline-link" title="Ver ${parte.subtitulo} en YouTube">
+                <i data-lucide="youtube" style="width: 15px; height: 15px;"></i> Ver en YouTube
+              </a>
+            </div>
+            <p style="font-style: italic; white-space: pre-line; line-height: 1.8;">${parte.letra}</p>
+          </div>
+        `).join("");
+
+        modalBody.innerHTML = `
+          ${partesHtml}
+          <p style="margin-bottom: 1.25rem; line-height: 1.85;">
+            <strong>Reseña e Historia:</strong><br>
+            ${item.descripcion}
+          </p>
+        `;
+      } else {
+        modalBody.innerHTML = `
+          <div style="margin-bottom: 1.25rem; background: #eee1c7; padding: 1.25rem; border-left: 4px solid var(--vinotinto-accent); border-radius: 0 12px 12px 0;">
+            <p style="font-style: italic; white-space: pre-line; margin-bottom: 0.5rem;">${item.cita}</p>
+            <small style="color: var(--vinotinto-accent); font-weight: 700;">— ${item.autor}</small>
+          </div>
+          <p style="margin-bottom: 1.25rem; line-height: 1.85;">
+            <strong>Reseña e Historia:</strong><br>
+            ${item.descripcion}
+          </p>
+        `;
+      }
+
       modalBody.style.fontSize = `${currentFontSize}rem`;
       modalBody.scrollTop = 0;
 
