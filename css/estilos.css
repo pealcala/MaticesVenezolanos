@@ -289,15 +289,15 @@ aside.collapsed .nav-btn {
   padding: 0.9rem 0;
 }
 
-/* PANEL PRINCIPAL (FONDO BEIGE) */
+/* PANEL PRINCIPAL (FONDO BEIGE CON SCROLL FLUIDO) */
 main.content-panel {
   flex: 1;
   background-color: var(--bg-panel);
   position: relative;
   overflow-y: auto;
-  padding: 2.25rem 2.5rem;
-  display: flex;
-  flex-direction: column;
+  overflow-x: hidden;
+  padding: 2rem 2.5rem 4rem 2.5rem;
+  display: block;
   animation: fadeIn 0.35s ease;
 }
 
@@ -419,52 +419,54 @@ main.content-panel {
 /* TARJETA GRANDE DE SOBRE NOSOTROS */
 .about-big-card {
   background: var(--bg-card);
-  border-radius: 26px;
+  border-radius: 24px;
   border: 1px solid var(--border-warm);
   box-shadow: var(--shadow-md);
-  overflow: hidden;
-  max-width: 980px;
-  margin: 0 auto;
+  max-width: 960px;
+  margin: 0 auto 2rem auto;
+  height: auto;
+  overflow: visible;
 }
 
 .about-top-banner {
   background: linear-gradient(135deg, #380a13 0%, #1e0308 100%);
-  padding: 3rem 2rem;
+  padding: 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-bottom: 3px solid var(--gold-accent);
+  border-radius: 23px 23px 0 0;
 }
 
 .about-large-logo {
-  max-width: 460px;
-  width: 90%;
+  max-width: 340px;
+  width: 85%;
   height: auto;
   object-fit: contain;
   background-color: #f7eedb;
-  padding: 1.5rem 2.25rem;
-  border-radius: 28px;
+  padding: 1rem 1.75rem;
+  border-radius: 22px;
   border: 1.5px solid rgba(229, 169, 59, 0.55);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45), inset 0 0 15px rgba(229, 169, 59, 0.08);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about-large-logo:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
 }
 
 .about-card-body {
-  padding: 2.5rem 3rem;
+  padding: 2.25rem 2.75rem;
   color: var(--text-main);
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .about-lead-text {
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   line-height: 1.85;
   color: #3b1b22;
   font-weight: 500;
@@ -476,13 +478,13 @@ main.content-panel {
   border-left: 5px solid var(--vinotinto-accent);
   border-radius: 0 16px 16px 0;
   padding: 1.25rem 1.75rem;
-  margin: 0.5rem 0;
+  margin: 0.35rem 0;
 }
 
 .quote-text {
   font-style: italic;
   color: #2b1117;
-  font-size: 1.08rem;
+  font-size: 1.06rem;
   line-height: 1.6;
   margin-bottom: 0.4rem;
 }
@@ -995,13 +997,13 @@ main.content-panel {
     font-size: 1.9rem;
   }
   main.content-panel {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 1rem 3.5rem 1rem;
   }
   .about-card-body {
     padding: 1.5rem;
   }
   .about-top-banner {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
   .modal-lyrics-body {
     padding: 1.5rem 1.25rem;
