@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misa de Aguinaldo 2026 - Matices Venezolanos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header id="appHeader"></header>
+
+  <div class="app-container">
+    <aside id="sidebar"></aside>
+
+    <main class="content-panel" id="mainPanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title"><i data-lucide="church"></i> Misa de Aguinaldo 2026</h2>
+          <p class="section-subtitle">Parroquia Sagrada Familia • Orden Litúrgico y Letras Completas</p>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-mode-toggle active-mode" id="btnMassGridView" onclick="switchMassViewMode('grid')">
+            <i data-lucide="layout-grid" style="width:16px;height:16px;"></i> Tarjetas
+          </button>
+          <button class="btn-mode-toggle" id="btnMassListView" onclick="switchMassViewMode('full')">
+            <i data-lucide="scroll-text" style="width:16px;height:16px;"></i> Guion Continuo
+          </button>
+        </div>
+      </div>
+
+      <div class="songs-toolbar">
+        <div class="search-box">
+          <i data-lucide="search"></i>
+          <input type="text" id="massSearchInput" placeholder="Buscar por momento litúrgico, canto, tono o letra..." oninput="filterMassSongs()">
+        </div>
+        <div id="massCountBadge" class="tone-badge">
+          <i data-lucide="list-music" style="width:14px;height:14px;"></i> 11 Cantos
+        </div>
+      </div>
+
+      <div class="songs-grid" id="massSongsContainer"></div>
+      <div class="full-mass-container" id="fullMassContainer"></div>
+    </main>
+  </div>
+
+  <!-- MODAL DE LETRA COMPLETA -->
+  <div class="modal-overlay" id="lyricsModal" onclick="closeLyricsModal()">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="modal-moment-label" id="modalMoment" style="display: block;">Momento Litúrgico</div>
+          <h3 class="modal-song-title" id="modalTitle">Título Canción</h3>
+          <span id="modalToneBadge" class="tone-badge" style="display: inline-flex; margin-top: 6px;">Tono: -</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeLyricsModal()">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-toolbar">
+        <div class="tool-group">
+          <button class="modal-tool-btn" onclick="changeFontSize(-1)" title="Reducir fuente">A-</button>
+          <button class="modal-tool-btn" onclick="changeFontSize(1)" title="Aumentar fuente">A+</button>
+        </div>
+        <div class="tool-group">
+          <button class="modal-tool-btn" id="autoScrollBtn" onclick="toggleAutoScroll()">
+            <i data-lucide="arrow-down-circle"></i> Desplazamiento
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-lyrics-body" id="modalLyricsText"></div>
+
+      <div class="modal-footer-nav" id="modalFooterNav" style="display: flex;">
+        <button class="modal-tool-btn" id="prevSongBtn" onclick="navigateMassSong(-1)">
+          <i data-lucide="chevron-left"></i> Anterior
+        </button>
+        <span id="modalCounter" style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">1 / 11</span>
+        <button class="modal-tool-btn" id="nextSongBtn" onclick="navigateMassSong(1)">
+          Siguiente <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/layout.js"></script>
+  <script>
+    const misaAguinaldosData = [
+      {
+        orden: 1,
+        momento: "Entrada",
+        titulo: "Popurrí: Corre Caballito / Al Llegar Aquí",
+        tono: "La+",
+        letra: `CORRE CABALLITO (La+)
+
+Corre caballito, vamos a Belén 
+A ver a María y al niño también
+Corre caballito Vamos a Belén
+A ver a María y al niño también 
+Al niño también dicen los pastores
+Que ha nacido un niño cubierto de flores 
+Que ha nacido un niño cubierto de flores
+
+El ángel Gabriel anunció a María
+Que el hijo divino, de ella nacería
+El ángel Gabriel Anunció a María
+Que el hijo divino, de ella nacería
+De ella nacería dicen los pastores
+Que ha nacido un niño cubierto de flores
+Que ha nacido un niño cubierto de flores
+
+----------------------------------------
+
+AL LLEGAR AQUÍ
+
+Al llegar aquí,
+Al llegar aquí,
+Me saco el pañuelo
+Para darle a todos feliz año nuevo 
+Para darle a todos feliz año nuevo
+
+Palomita blanca, Palomita blanca,
+Patitas azules
+Tú eres la que cantas por dentro´e las nubes
+Tú eres la que cantas por dentro´e las nubes
+
+lan lan lan lan
+LALALALALALALALA
+lan lan lan lan
+LALALALALALALALA`
+      },
+      {
+        orden: 2,
+        momento: "Perdón",
+        titulo: "Señor Ten Piedad",
+        tono: "Mi",
+        letra: `Señor ten piedad 
+Piedad de nosotros 
+Y las navidades se llenan de gozo 
+Señor ten piedad 
+Piedad de nosotros 
+Y las navidades se llenan de gozo
+
+Oh. Niño divino de la salvación por nuestras ofensas pedimos perdón.
+Oh niño divino de la salvación danos la alegría de tu corazón. 
+
+Señor ten piedad
+Piedad de nosotros
+Y las navidades se llenan de gozo
+Señor ten piedad
+Piedad de nosotros
+Y las navidades se llenan de gozo`
+      },
+      {
+        orden: 3,
+        momento: "Inter Lectura",
+        titulo: "Inunda Mi Corazón",
+        tono: "Do+",
+        letra: `Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+
+Y ven a mí, y ven a mi
+Que de ti sediento estoy
+Y ven a mí, y ven a mi
+Que de ti sediento estoy
+
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor
+Inunda mi corazón de tu palabra Señor`
+      },
+      {
+        orden: 4,
+        momento: "Ofertorio",
+        titulo: "Venimos a Ofrecer",
+        tono: "Mi+",
+        letra: `Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Con el alma alegre y gozo ante tu altar
+Tu pueblo entrega todo por la felicidad
+Con el alma alegre y gozo ante tu altar
+Tu pueblo entrega todo por la felicidad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Acepta nuestra ofrenda Dios de toda bondad,
+Que en tu presencia dejo Divina Majestad
+Acepta nuestra ofrenda Dios de toda bondad,
+Que en tu presencia dejo Divina Majestad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+
+Recibe de esta tierra los frutos que se dan
+Y sean sustento para la humanidad
+Recibe de esta tierra los frutos que se dan
+Y sean sustento para la humanidad
+
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán
+Venimos a ofrecer junto al vino y al pan
+Venimos a entregarte nuestro esfuerzo y nuestro afán`
+      },
+      {
+        orden: 5,
+        momento: "Santo",
+        titulo: "Santo",
+        tono: "Mi-",
+        letra: `Santo, santo, santo 
+Santo es el Señor, 
+Dios del Universo, Santo es el Señor 
+Santo, santo, santo 
+Santo es el Señor, 
+Dios del Universo, Santo es el Señor 
+
+Hosanna en el cielo, hosanna en las alturas, 
+bendito el que viene en nombre del Señor 
+Hosanna en el cielo, hosanna en las alturas, 
+bendito el que viene en nombre del Señor`
+      },
+      {
+        orden: 6,
+        momento: "Cordero",
+        titulo: "Cordero",
+        tono: "Mi+",
+        letra: `Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+ten piedad de nosotros 
+
+Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+ten piedad de nosotros 
+
+Cordero, De Dios 
+que quitas el pecado del mundo, 
+ten piedad de nosotros, 
+y danos la paz`
+      },
+      {
+        orden: 7,
+        momento: "Comunión",
+        titulo: "Niño Lindo",
+        tono: "Mi-",
+        letra: `Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Esa tu hermosura, ese tu candor 
+El alma me roba, el alma me roba
+Me roba el amor (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Con tus ojos lindos, Jesús, mírame 
+Y solo con eso, y solo con eso
+Me consolaré (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+La vida bien mío, y el alma también 
+Te ofrezco gustoso, te ofrezco gustoso
+Rendido a tus pies (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+De mí no te ausentes, pues, ¿sin tí qué haré?
+Cuando tú te vayas, Cuando tú te vayas
+haz por llevarme (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios 
+
+Adiós, tierno Infante, adiós, Niño, adiós
+adiós, dulce amante, adiós, dulce amante,
+adiós Niño adiós (x2)
+
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios
+Niño lindo, ante ti me rindo 
+Niño lindo, eres tú mi Dios`
+      },
+      {
+        orden: 8,
+        momento: "Reflexión",
+        titulo: "El Tamborilero",
+        tono: "Do+",
+        letra: `El camino que lleva a Belén
+Baja hasta el valle que la nieve cubrió
+Los pastorcillos quieren ver a su rey
+Le traen regalos en su humilde zurrón
+Ropopompon, ropopompon
+Ha nacido en un portal de Belén
+El niño Dios
+
+Yo quisiera poner a tus pies
+Algún presente que te agrade, Señor
+Mas tú ya sabes que soy pobre también
+Y no poseo más que un viejo tambor
+Ropopompon, ropopopon
+En tu honor frente al portal tocaré
+Con mi tambor
+
+El camino que lleva a Belén
+Yo voy marcando con mi viejo tambor
+Nada mejor hay que te pueda ofrecer
+Su ronco acento es un canto de amor
+Ropopompon, ropopompon
+Cuando Dios me vio tocando ante él
+Me sonrió`
+      },
+      {
+        orden: 9,
+        momento: "Salida I",
+        titulo: "A Ti Te Cantamos (Preciosa María)",
+        tono: "Re-",
+        letra: `A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Tú la flor más pura, Del vergel del cielo
+Eres la esperanza, Eres el consuelo
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+A ti gran señora, A ti suspiramos
+Madre del Dios niño, A quien tanto amamos
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+No nos desampares, Divina Señora,
+Sé nuestro consuelo en cualquiera hora.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Lumbrera del mundo, cándida María,
+En la vida triste nuestros pasos guía
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Por Ti, Virgen pía, baja el Redentor;
+Por Ti el alma mía se inflama de amor.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María
+
+Virgen redentora, quiero ser tu amigo,
+Llévame contigo al llegar mi hora.
+A ti te cantamos preciosa María
+Y de ti esperamos paz y alegría
+A ti te cantaaamos
+A ti te cantaaamos 
+preciosa María`
+      },
+      {
+        orden: 10,
+        momento: "Salida II",
+        titulo: "Burrito Sabanero",
+        tono: "Re+",
+        letra: `Con mi burrito sabanero, voy camino de Belén
+Con mi burrito sabanero, voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+El lucerito mañanero ilumina mi sendero
+El lucerito mañanero ilumina mi sendero
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+Tuki tuki tuki tuki
+Tuki tuki tuki ta
+Apúrate, mi burrito
+Que ya vamos a llegar
+Tuki tuki tuki tuki
+Tuki tuki tuki tu
+Apúrate mi burrito
+Vamos a ver a Jesús
+
+Con mi cuatrico voy cantando, mi burrito va trotando
+Con mi cuatrico voy cantando, mi burrito va trotando
+Si me ven, si me ven
+Voy camino de Belén
+Si me ven, si me ven
+Voy camino de Belén
+
+Tuki tuki tuki tuki
+Tuki tuki tuki ta
+Apúrate, mi burrito
+Que ya vamos a llegar
+Tuki tuki tuki tuki
+Tuki tuki tuki tu
+Apúrate mi burrito
+Vamos a ver a Jesús`
+      },
+      {
+        orden: 11,
+        momento: "Salida III",
+        titulo: "La Jornada (Din Din Din)",
+        tono: "Re+",
+        letra: `¡DIN, DIN, DIN! ES HORA DE PARTIR
+¡DIN, DIN, DIN! CAMINO DE BELÉN
+LOS ESPOSOS VAN DESDE NAZARETH
+
+La Virgen María, modesta y sencilla, 
+Es la maravilla del dichoso Edén.
+Sobre un jumentillo se sienta María
+Y es experto guía el casto José. 
+
+Van José y María, van hacia Belén
+Donde nuestro bien ha de aparecer. 
+Largo es el camino, aire sofocante,
+Mas es importante cumplir el deber.
+
+Llegan extenuados al morir el día
+Y en la noche fría no hay dónde hospedar.
+José solicita, fuerte y animoso,
+Lugar de reposo en todo Belén.
+
+Posadas repletas de inmenso gentío,
+¡Ay, Señor, ¡Dios mío! ¿A dónde llegar?
+Y saliendo al campo una gruta encuentran
+Y en ella se adentran para pernoctar.
+
+Al siguiente día, radiante de luz,
+¡Dan la bienvenida al Niño Jesús!
+San José y la Virgen la mula y el buey
+fueron lo que vieron al niño nacer.
+
+Celebremos juntos este hermoso día:
+llega la alegría de la Navidad.`
+      }
+    ];
+
+    let currentMassIndex = 0;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("evento-misa-2026", "Evento • Misa de Aguinaldo 2026");
+      renderMassCards(misaAguinaldosData);
+      renderFullMass(misaAguinaldosData);
+    });
+
+    function renderMassCards(list) {
+      const container = document.getElementById("massSongsContainer");
+      container.innerHTML = "";
+
+      list.forEach(item => {
+        const originalIndex = misaAguinaldosData.findIndex(s => s.orden === item.orden);
+        const card = document.createElement("div");
+        card.className = "song-card";
+        card.onclick = () => openMassModal(originalIndex);
+
+        card.innerHTML = `
+          <div class="song-card-top">
+            <span class="moment-badge">${item.orden}. ${item.momento}</span>
+            <span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> ${item.tono}</span>
+          </div>
+          <div class="song-card-header">
+            <h3 class="song-title">${item.titulo}</h3>
+          </div>
+          <p class="song-snippet">${item.letra}</p>
+          <div class="song-btn-view">
+            <i data-lucide="book-open" style="width: 16px; height: 16px;"></i> Ver Letra Completa
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("massCountBadge").innerHTML = `<i data-lucide="list-music" style="width:14px;height:14px;"></i> ${list.length} Cantos`;
+      lucide.createIcons();
+    }
+
+    function renderFullMass(list) {
+      const container = document.getElementById("fullMassContainer");
+      container.innerHTML = "";
+
+      list.forEach(item => {
+        const block = document.createElement("div");
+        block.className = "mass-block-card";
+        block.innerHTML = `
+          <div class="mass-block-header">
+            <div class="mass-block-title-group">
+              <span class="mass-block-moment">${item.orden}. ${item.momento}</span>
+              <h3 class="mass-block-title">${item.titulo}</h3>
+            </div>
+            <span class="tone-badge"><i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}</span>
+          </div>
+          <div class="mass-block-lyrics">${item.letra}</div>
+        `;
+        container.appendChild(block);
+      });
+      lucide.createIcons();
+    }
+
+    function switchMassViewMode(mode) {
+      const grid = document.getElementById("massSongsContainer");
+      const full = document.getElementById("fullMassContainer");
+      const btnGrid = document.getElementById("btnMassGridView");
+      const btnList = document.getElementById("btnMassListView");
+
+      if (mode === "grid") {
+        grid.style.display = "grid";
+        full.classList.remove("active");
+        btnGrid.classList.add("active-mode");
+        btnList.classList.remove("active-mode");
+      } else {
+        grid.style.display = "none";
+        full.classList.add("active");
+        btnList.classList.add("active-mode");
+        btnGrid.classList.remove("active-mode");
+      }
+    }
+
+    function filterMassSongs() {
+      const query = document.getElementById("massSearchInput").value.toLowerCase();
+      const filtered = misaAguinaldosData.filter(s => 
+        s.momento.toLowerCase().includes(query) ||
+        s.titulo.toLowerCase().includes(query) || 
+        s.letra.toLowerCase().includes(query) ||
+        s.tono.toLowerCase().includes(query)
+      );
+      renderMassCards(filtered);
+      renderFullMass(filtered);
+    }
+
+    function openMassModal(index) {
+      currentMassIndex = index;
+      const item = misaAguinaldosData[index];
+
+      document.getElementById("modalMoment").innerText = `Momento ${item.orden} • ${item.momento}`;
+      document.getElementById("modalTitle").innerText = item.titulo;
+      document.getElementById("modalToneBadge").innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
+      
+      const modalBody = document.getElementById("modalLyricsText");
+      modalBody.style.whiteSpace = "pre-line";
+      modalBody.textContent = item.letra;
+      modalBody.style.fontSize = `${currentFontSize}rem`;
+      modalBody.scrollTop = 0;
+
+      document.getElementById("modalCounter").innerText = `${index + 1} / ${misaAguinaldosData.length}`;
+      document.getElementById("prevSongBtn").disabled = index === 0;
+      document.getElementById("nextSongBtn").disabled = index === misaAguinaldosData.length - 1;
+
+      stopAutoScroll();
+      document.getElementById("lyricsModal").classList.add("open");
+      lucide.createIcons();
+    }
+
+    function navigateMassSong(step) {
+      const nextIndex = currentMassIndex + step;
+      if (nextIndex >= 0 && nextIndex < misaAguinaldosData.length) {
+        openMassModal(nextIndex);
+      }
+    }
+  </script>
+</body>
+</html>

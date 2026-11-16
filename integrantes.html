@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrantes - Matices Venezolanos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header id="appHeader"></header>
+
+  <div class="app-container">
+    <aside id="sidebar"></aside>
+
+    <main class="content-panel" id="mainPanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title"><i data-lucide="users"></i> Integrantes</h2>
+          <p class="section-subtitle">Las voces e instrumentos que dan vida a cada nota</p>
+        </div>
+      </div>
+      <div class="members-grid" id="membersContainer"></div>
+    </main>
+  </div>
+
+  <script src="js/layout.js"></script>
+  <script>
+    const integrantesData = [
+      {
+        nombre: "Alexis Rafael Lárez Fernández",
+        rol: "Voz, Percusión",
+        origen: "Nacido en la Isla de Margarita Estado Nueva Esparta"
+      },
+      {
+        nombre: "Marycruz Lárez Mundarain",
+        rol: "Voz",
+        origen: "Nacida en Cumaná Estado Sucre"
+      },
+      {
+        nombre: "Alexandra Margrelis Reolón Rodríguez",
+        rol: "Voz, Flauta",
+        origen: "Nacida en Puerto Ordaz Estado Bolívar"
+      },
+      {
+        nombre: "María Valentina León Narváez",
+        rol: "Voz, Cuatro, Flauta",
+        origen: "Nacida en Maturín Estado Monagas"
+      },
+      {
+        nombre: "Liliana Garcia Villegas",
+        rol: "Voz",
+        origen: "Nacida en Maracay Estado Aragua"
+      },
+      {
+        nombre: "Vilma Rodríguez",
+        rol: "Voz",
+        origen: "Nacida en Ciudad Bolívar Estado Bolívar"
+      },
+      {
+        nombre: "Pedro Daniel Alcalá Rojas",
+        rol: "Voz, Cuatro, Guitarra, Ukelele",
+        origen: "Nacido en Ciudad Bolívar Estado Bolívar"
+      },
+      {
+        nombre: "Victor Tovar",
+        rol: "Percusión",
+        origen: "Nacido en Maracay Estado Aragua"
+      },
+      {
+        nombre: "Diomer José Herrera Urbaez",
+        rol: "Voz",
+        origen: "Nacido en Puerto Ordaz Estado Bolívar"
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("integrantes", "Integrantes del Grupo");
+      renderIntegrantes();
+    });
+
+    function renderIntegrantes() {
+      const container = document.getElementById("membersContainer");
+      container.innerHTML = "";
+
+      integrantesData.forEach(m => {
+        const initials = m.nombre.split(" ").map(w => w[0]).slice(0, 2).join("");
+        const card = document.createElement("div");
+        card.className = "member-card";
+
+        card.innerHTML = `
+          <div class="member-card-header">
+            <div class="member-avatar">${initials}</div>
+            <div class="member-info-title">
+              <h3>${m.nombre}</h3>
+              <div class="member-role">${m.rol}</div>
+            </div>
+          </div>
+          <div class="member-origin">
+            <i data-lucide="map-pin" style="width: 16px; height: 16px;"></i>
+            <span>${m.origen}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>

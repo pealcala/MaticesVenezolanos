@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros - Matices Venezolanos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header id="appHeader"></header>
+
+  <div class="app-container">
+    <aside id="sidebar"></aside>
+
+    <main class="content-panel" id="mainPanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title"><i data-lucide="compass"></i> Sobre Nosotros</h2>
+          <p class="section-subtitle">Nuestra historia, sentido y visión cultural</p>
+        </div>
+      </div>
+
+      <div class="about-big-card">
+        <div class="about-top-banner">
+          <img id="aboutLogo" alt="Logo Matices Venezolanos" class="about-large-logo">
+        </div>
+        <div class="about-card-body">
+          <p class="about-lead-text">
+            Somos proyecto en marcha, una historia en desarrollo, dejamos atrás nuestra tierra, pero adonde vamos llevamos nuestra cultura, y el mayor homenaje que podemos hacer a nuestras raíces es mostrar, vivir, transmitir nuestra esencia de ser venezolano.
+          </p>
+
+          <div class="quote-box">
+            <p class="quote-text">
+              "Un modo de ser y de vivir, una manera de sentir y actuar que brota de las entrañas de la misma tierra."
+            </p>
+            <div class="quote-author">— Rómulo Gallegos</div>
+          </div>
+
+          <div class="quote-box">
+            <p class="quote-text">
+              "Sincretismo cultural y mestizaje."
+            </p>
+            <div class="quote-author">— Arturo Uslar Pietri</div>
+          </div>
+
+          <p class="about-lead-text" style="font-weight: 700; color: var(--vinotinto-accent);">
+            Y eso es lo que define a "Matices Venezolanos".
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/layout.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initLayout("sobre-nosotros", "Nuestra Historia");
+    });
+  </script>
+</body>
+</html>
