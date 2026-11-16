@@ -9,6 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/estilos.css">
+  <style>
+    .youtube-tool-btn {
+      background-color: #c41e3a;
+      color: #ffffff;
+      border: 1px solid #9e142b;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .youtube-tool-btn:hover {
+      background-color: #a0142c;
+      color: #ffffff;
+      border-color: #7d0e21;
+      transform: translateY(-1px);
+    }
+    .youtube-tool-btn.disabled {
+      background-color: #e6dac3;
+      color: var(--text-muted);
+      border-color: var(--border-warm);
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+  </style>
 </head>
 <body>
 
@@ -56,6 +79,7 @@
         <div class="tool-group">
           <button class="modal-tool-btn" onclick="changeFontSize(-1)" title="Reducir fuente">A-</button>
           <button class="modal-tool-btn" onclick="changeFontSize(1)" title="Aumentar fuente">A+</button>
+          <span id="modalYoutubeContainer"></span>
         </div>
         <div class="tool-group">
           <button class="modal-tool-btn" id="autoScrollBtn" onclick="toggleAutoScroll()">
@@ -75,6 +99,7 @@
         id: "viajera-del-rio",
         titulo: "Viajera del Río",
         tono: "LA",
+        youtube: "https://youtu.be/wrd1RrMCZRM?si=YpFW8sb0FGZ2NEt7",
         cita: `Paseando una vez
 por el malecón,
 extasiado me quedé
@@ -110,6 +135,7 @@ y vuelvo a ver mi flor.`,
         id: "tonada-por-ella",
         titulo: "Tonada Por Ella",
         tono: "MI m",
+        youtube: "https://youtu.be/R3kp1zDKoJk?si=CGZZG6pxskfuGzvh",
         cita: `Mi depósito de lágrimas está full
 Y no encuentro todavía la razón
 Le pregunto a mi botella de Cocuy
@@ -150,6 +176,7 @@ Que Venezuela renació`,
         id: "el-velero",
         titulo: "El Velero",
         tono: "SOL m",
+        youtube: "https://youtu.be/R3kp1zDKoJk?si=CGZZG6pxskfuGzvh",
         cita: `Si tú no llegas, morena
 A las orillas del mar
 El ancla de tu demora
@@ -193,6 +220,7 @@ Que no me hagan esperar`,
         id: "mi-matiz",
         titulo: "Mi Matiz",
         tono: "RE",
+        youtube: null,
         cita: `Si oyes a un cuatro tocar
 Y una hermosa voz cantar
 Se une alguna percusión y ya el ensamble se va a armar 
@@ -217,6 +245,7 @@ Mi granito es mi matiz`,
         id: "venezuela",
         titulo: "Venezuela",
         tono: "LA",
+        youtube: "https://youtu.be/vS8NaRJBjrg?si=D-EWY1ZDMshEEZTH",
         cita: `Llevo tu luz y tu aroma en mi piel
 y el cuatro en el corazón
 llevo en mi sangre la espuma del mar
@@ -261,6 +290,7 @@ en Venezuela.`,
         id: "el-papagayo",
         titulo: "El Papagayo",
         tono: "SOL",
+        youtube: "https://youtu.be/0OAYJ2J-MzQ?si=vOg4mAKPMZjUrZ7H",
         cita: `Quiero hacer un papagayo volador multicolor
 Para remontar las nubes y llegar donde esta Dios
 Para remontar las nubes y llegar donde esta Dios
@@ -313,6 +343,7 @@ Y que juegue con el viento la bandera nacional`,
         id: "el-burrito-sabanero",
         titulo: "El Burrito Sabanero",
         tono: "SOL",
+        youtube: "https://youtu.be/0OAYJ2J-MzQ?si=vOg4mAKPMZjUrZ7H",
         cita: `Con mi burrito sabanero voy camino de Belén
 Con mi burrito sabanero voy camino de Belén
 Si me ven, si me ven voy camino de Belén
@@ -418,6 +449,21 @@ Apúrate mi burrito, vamos a ver a Jesús`,
       document.getElementById("modalTitle").innerText = item.titulo;
       document.getElementById("modalToneBadge").innerHTML = `<i data-lucide="music-4" style="width:14px;height:14px;"></i> Tono: ${item.tono}`;
       
+      const ytContainer = document.getElementById("modalYoutubeContainer");
+      if (item.youtube) {
+        ytContainer.innerHTML = `
+          <a href="${item.youtube}" target="_blank" rel="noopener noreferrer" class="modal-tool-btn youtube-tool-btn" title="Ver video en YouTube">
+            <i data-lucide="youtube" style="width: 16px; height: 16px;"></i> YouTube
+          </a>
+        `;
+      } else {
+        ytContainer.innerHTML = `
+          <span class="modal-tool-btn youtube-tool-btn disabled" title="Video en preparación">
+            <i data-lucide="youtube" style="width: 16px; height: 16px;"></i> Próximamente…
+          </span>
+        `;
+      }
+
       const modalBody = document.getElementById("modalLyricsText");
       modalBody.style.whiteSpace = "normal";
       modalBody.innerHTML = `
